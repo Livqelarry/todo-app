@@ -1,14 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 
 export default function App() {
   // "name" adalah nama variabel yang bisa dipanggil
   // dan "setName" adalah nama yang dipanggil untuk mengganti isi variable "name"
   const [name, setName] = useState('Praditya');
-  const [person, setPerson] = useState(
-    {name: 'Bob', age: 80}
-  )
+  const [age, setAge] = useState('30')
 
   // ini adalah fungsi untuk menjalankan button
   // untuk memberi fungsi di button dengan cara onPress={namaFungsi}
@@ -19,13 +17,21 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.boldText}>My name is {name}</Text>
-        <Text style={styles.boldText}>His name is {person.name} and his age is {person.age}</Text>
-      </View>
-      <View styles={styles.buttonContainer}>
-        <Button title='update state' onPress={clickHandler} />
-      </View>
+      <Text>Enter name:</Text>
+      <TextInput 
+        multiline
+        style={styles.input} 
+        placeholder='Your Name'
+        onChangeText={(val) => setName(val) } />
+
+      <Text>Enter age:</Text>
+      <TextInput 
+        keyboardType='numeric'
+        style={styles.input} 
+        placeholder='Your age'
+        onChangeText={(val) => setAge(val) } />
+
+      <Text>Name: {name}, Age: {age}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -38,14 +44,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  header:{
-    backgroundColor: 'gray',
-    padding: 20,
-    marginBottom: 40,
-  },
-  boldText: {
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-  },
+  input: {
+    borderWidth:1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200,
+  }
 });
